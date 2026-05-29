@@ -15,6 +15,7 @@
 
     <div id="contenedor-productos" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 20px;"></div>
 
+    <!-- Login container with real form -->
     <div id="login-container" style="text-align: center; margin-top: 30px; padding: 20px; border: 1px solid #ccc; max-width: 400px; margin-left: auto; margin-right: auto;">
         <h3>Admin Login</h3>
         <form id="login-form">
@@ -26,9 +27,11 @@
         </form>
     </div>
 
+    <!-- OFFICIAL FIREBASE LIBRARIES -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
+    <!-- YOUR FIREBASE CONFIGURATION -->
     <script>
       var firebaseConfig = {
         apiKey: "AIzaSyAs7z_LgXF9fXm7pI_zREb_4U7v19gOOMM",
@@ -42,6 +45,7 @@
       firebase.initializeApp(firebaseConfig);
     </script>
 
+    <!-- Script principal -->
     <script src="script.js"></script>
 </body>
 </html>
