@@ -16,15 +16,16 @@ const products = [
 
 // 2. Función para mostrar los productos en la tienda de forma automática
 function loadProducts() {
+    // CORRECCIÓN CLAVE: Ahora coincide perfectamente con tu index.html
     const container = document.getElementById("contenedor-productos");
     if (!container) return;
 
-    container.innerHTML = ""; 
+    container.innerHTML = ""; // Limpiar contenedor
 
     products.forEach(product => {
         const card = document.createElement("div");
         card.className = "product-card";
-        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; width: 200px;";
+        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; width: 200px; background: white; color: black;";
 
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}" style="max-width: 100%; height: auto;">
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            // Evita que la página se recargue y desaparezcan tus datos
+            // DETA CORREGIDO: Bloquea por completo que los datos desaparezcan
             e.preventDefault();
 
             const mail = document.getElementById('login-email').value;
@@ -56,18 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = document.getElementById('btn-login');
 
             const originalText = button.textContent;
-            button.textContent = "Conectando...";
+            button.textContent = "Connecting...";
             button.disabled = true;
 
-            // Conectar directamente con el Firebase que inicializaste en el HTML
+            // Conectar directamente con el Firebase clásico v8 de tu HTML
             firebase.auth().signInWithEmailAndPassword(mail, password)
                 .then((userCredential) => {
-                    alert("¡Bienvenido Administrador! Conexión exitosa.");
+                    alert("Welcome Administrator! Connection successful.");
                     button.textContent = originalText;
                     button.disabled = false;
                 })
                 .catch((error) => {
-                    alert("Error al iniciar sesión: " + error.message);
+                    alert("Login error: " + error.message);
                     button.textContent = originalText;
                     button.disabled = false;
                 });
