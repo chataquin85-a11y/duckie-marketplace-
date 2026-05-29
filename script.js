@@ -19,7 +19,7 @@ function loadProducts() {
     const container = document.getElementById("contenedor-productos");
     if (!container) return;
 
-    container.innerHTML = ""; // Limpiar contenedor
+    container.innerHTML = ""; 
 
     products.forEach(product => {
         const card = document.createElement("div");
@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             firebase.auth().signInWithEmailAndPassword(mail, password)
                 .then((userCredential) => {
                     alert("¡Bienvenido Administrador! Conexión exitosa.");
-                    // Aquí puedes redirigir o mostrar opciones de administración
                     button.textContent = originalText;
                     button.disabled = false;
                 })
