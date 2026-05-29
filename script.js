@@ -24,8 +24,40 @@ const productos = [
     precio: "$50.00",
     descripcion: "Procesador de alimentos en excelente estado.",
     imagen: "https://via.placeholder.com/150" // Aquí pondremos tu enlace real de ImgBB más adelante
-  },
-  {
+  }, // 4. Escuchar el clic en el botón de iniciar sesión
+document.getElementById('btn-login')?.addEventListener('click', () => {
+  const email = document.getElementById('login-email').value;
+  const contrasena = document.getElementById('login-contrasena').value;
+
+  // Enviar los datos a Firebase para validar al administrador
+  signInWithEmailAndPassword(auth, email, contrasena)
+    .then((userCredential) => {
+      alert("¡Inicio de sesión exitoso! Bienvenido Administrador.");
+      console.log("Usuario firmado:", userCredential.user);
+    })
+    .catch((error) => {
+      alert("Error al entrar: Verificar correo o contraseña.");
+      console.error("Código de error:", error.code, error.message);
+    });
+});
+
+  // 4. Escuchar el clic en el botón de iniciar sesión
+document.getElementById('btn-login')?.addEventListener('click', () => {
+  const email = document.getElementById('login-email').value;
+  const contrasena = document.getElementById('login-contrasena').value;
+
+  // Enviar los datos a Firebase para validar al administrador
+  signInWithEmailAndPassword(auth, email, contrasena)
+    .then((userCredential) => {
+      alert("¡Inicio de sesión exitoso! Bienvenido Administrador.");
+      console.log("Usuario firmado:", userCredential.user);
+    })
+    .catch((error) => {
+      alert("Error al entrar: Verificar correo o contraseña.");
+      console.error("Código de error:", error.code, error.message);
+    });
+});
+
     nombre: "Prenda de Ropa de Marca",
     precio: "$25.00",
     descripcion: "Ropa de marca original, como nueva.",
