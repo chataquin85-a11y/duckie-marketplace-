@@ -25,17 +25,18 @@ function loadProducts() {
     products.forEach(product => {
         const card = document.createElement("div");
         card.className = "product-card";
-        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; width: 200px; background: white; color: black;";
-
-        card.innerHTML = `
+        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; widt;">${product.price}</p>
+              card.innerHTML = `
             <img src="${product.image}" alt="${product.titulo}" style="max-width: 100%; height: auto;">
             <h3>${product.titulo}</h3>
             <p>${product.description}</p>
             <p class="price" style="font-weight: bold; color: #28a745;">${product.price}</p>
             <button style="background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Comprar</button>
-        `;
-        container.appendChild(card);
-    });
+
+  
+
+
+    
 }
 
 // Ejecutar la carga cuando la página esté lista
