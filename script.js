@@ -108,3 +108,35 @@ document.getElementById('btn-login')?.addEventListener('click', () => {
       console.error("Código de error:", error.code, error.message);
     });
 });
+// ==========================================
+// 3. SISTEMA DE AUTENTICACIÓN (LOGIN)
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const formularioLogin = document.querySelector('form') || document.getElementById('login-form');
+    
+    if (formularioLogin) {
+        formularioLogin.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const correo = formularioLogin.querySelector('input[type="email"]').value;
+            const contrasena = formularioLogin.querySelector('input[type="password"]').value;
+            const boton = formularioLogin.querySelector('button');
+
+            const textoOriginal = boton.textContent;
+            boton.textContent = "Conectando...";
+            boton.disabled = true;
+
+            firebase.auth().signInWithEmailAndPassword(correo, contrasena)
+                .then((userCredential) => {
+                    alert("¡Bienvenido Administrador! Conexión exitosa.");
+                    window.location.href = "dashboard.html"; 
+                })
+                .catch((error) => {
+                    alert("Error al entrar: " + error.message);
+                    boton.textContent = textoOriginal;
+                    boton.disabled = false;
+                });
+        });
+    }
+});
