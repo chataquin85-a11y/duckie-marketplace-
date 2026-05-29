@@ -1,4 +1,4 @@
-// 1. Listado de productos en tu inventario (Usa "titulo" para evitar que el iPad escriba "yam")
+// 1. Listado de productos en tu inventario
 const products = [
     {
         titulo: "NutriBullet",
@@ -16,41 +16,40 @@ const products = [
 
 // 2. Función para mostrar los productos automáticamente en la tienda
 function loadProducts() {
-    // Busca el contenedor que tienes en tu index.html
+    // Busca exactamente el contenedor que tienes en tu index.html
     const container = document.getElementById("contenedor-productos");
     if (!container) return;
 
-    container.innerHTML = ""; // Limpiar el espacio
+    container.innerHTML = ""; // Limpiar el espacio viejo
 
     products.forEach(product => {
         const card = document.createElement("div");
         card.className = "product-card";
-        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; widt;">${product.price}</p>
-              card.innerHTML = `
+        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; width: 200px; background: white; color: black;";
+
+        card.innerHTML = `
             <img src="${product.image}" alt="${product.titulo}" style="max-width: 100%; height: auto;">
             <h3>${product.titulo}</h3>
             <p>${product.description}</p>
             <p class="price" style="font-weight: bold; color: #28a745;">${product.price}</p>
             <button style="background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Comprar</button>
-
-  
-
-
-    
+        `;
+        container.appendChild(card);
+    });
 }
 
-// Ejecutar la carga cuando la página esté lista
+// Ejecutar la carga de productos cuando la página termine de abrirse
 document.addEventListener("DOMContentLoaded", loadProducts);
 
 // ==========================================================
-// 3. SISTEMA DE LOGIN SEGURO - EVITA EL REINICIO DE PÁGINA
+// 3. SISTEMA DE AUTENTICACIÓN (LOGIN) - COMPATIBLE CON TU HTML
 // ==========================================================
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            // Frena el borrado automático de los campos de texto
+            // Evita que la página se recargue y desaparezcan tus datos de la pantalla
             e.preventDefault();
 
             const mail = document.getElementById('login-email').value;
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.textContent = "Connecting...";
             button.disabled = true;
 
-            // Conexión directa con las librerías v8 de tu index.html
+            // Conectar directamente con el Firebase que inicializaste en tu HTML
             firebase.auth().signInWithEmailAndPassword(mail, password)
                 .then((userCredential) => {
                     alert("Welcome Administrator! Connection successful.");
