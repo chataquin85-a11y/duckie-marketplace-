@@ -1,4 +1,23 @@
+// 1. Importar los servicios que necesitamos desde la plataforma de Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+// 2. Tus credenciales exclusivas de duckie-marketplace
+const firebaseConfig = {
+  apiKey: "AIzaSyDnZsPa7B3_V0igV6FbyySUY6Sdl6vqq2E",
+  authDomain: "duckie-marketplace.firebaseapp.com",
+  projectId: "duckie-marketplace",
+  storageBucket: "duckie-marketplace.firebasestorage.app",
+  messagingSenderId: "420270054054",
+  appId: "1:420270054054:web:f13a3c50533a14f3f47267"
+};
+
+// 3. Inicializar Firebase y el motor de Autenticación
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 // Lista de productos de tu inventario
+
 const productos = [
   {
     nombre: "NutriBullet",
