@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=width-device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie AI Marketplace</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +15,6 @@
 
     <div id="contenedor-productos" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 20px;"></div>
 
-    <!-- Login container with real form -->
     <div id="login-container" style="text-align: center; margin-top: 30px; padding: 20px; border: 1px solid #ccc; max-width: 400px; margin-left: auto; margin-right: auto;">
         <h3>Admin Login</h3>
         <form id="login-form">
@@ -27,12 +26,10 @@
         </form>
     </div>
 
-    <!-- OFFICIAL FIREBASE LIBRARIES (Essential for it to work) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-    <!-- YOUR FIREBASE CONFIGURATION -->
-        <script>
+    <script>
       var firebaseConfig = {
         apiKey: "AIzaSyAs7z_LgXF9fXm7pI_zREb_4U7v19gOOMM",
         authDomain: "duckie-marketplace-.firebaseapp.com",
@@ -45,4 +42,6 @@
       firebase.initializeApp(firebaseConfig);
     </script>
 
-    >
+    <script src="script.js"></script>
+</body>
+</html>
