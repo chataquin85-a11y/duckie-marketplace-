@@ -59,3 +59,20 @@ function cargarProductos() {
 
 // Ejecutar la función cuando la página termine de cargar
 document.addEventListener("DOMContentLoaded", cargarProductos);
+// 4. Escuchar el clic en el botón de iniciar sesión
+document.getElementById('btn-login')?.addEventListener('click', () => {
+  const email = document.getElementById('login-email').value;
+  const contrasena = document.getElementById('login-contrasena').value;
+
+  // Enviar los datos a Firebase para validar al administrador
+  signInWithEmailAndPassword(auth, email, contrasena)
+    .then((userCredential) => {
+      alert("¡Inicio de sesión exitoso! Bienvenido Administrador.");
+      console.log("Usuario firmado:", userCredential.user);
+      // Aquí podremos ocultar el formulario o mostrar opciones exclusivas más adelante
+    })
+    .catch((error) => {
+      alert("Error al entrar: Verificar correo o contraseña.");
+      console.error("Código de error:", error.code, error.message);
+    });
+});
