@@ -1,141 +1,76 @@
-// 1. Importar los servicios que necesitamos desde la plataforma de Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-// 2. Tus credenciales exclusivas de duckie-marketplace
-const firebaseConfig = {
-  apiKey: "AIzaSyDnZsPa7B3_V0igV6FbyySUY6Sdl6vqq2E",
-  authDomain: "duckie-marketplace.firebaseapp.com",
-  projectId: "duckie-marketplace",
-  storageBucket: "duckie-marketplace.firebasestorage.app",
-  messagingSenderId: "420270054054",
-  appId: "1:420270054054:web:f13a3c50533a14f3f47267"
-};
-
-// 3. Inicializar Firebase y el motor de Autenticación
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// Lista de productos de tu inventario
-
-const productos = [
-  {
-    nombre: "NutriBullet",
-    precio: "$50.00",
-    descripcion: "Procesador de alimentos en excelente estado.",
-    imagen: "https://via.placeholder.com/150" // Aquí pondremos tu enlace real de ImgBB más adelante
-  }, // 4. Escuchar el clic en el botón de iniciar sesión
-document.getElementById('btn-login')?.addEventListener('click', () => {
-  const email = document.getElementById('login-email').value;
-  const contrasena = document.getElementById('login-contrasena').value;
-
-  // Enviar los datos a Firebase para validar al administrador
-  signInWithEmailAndPassword(auth, email, contrasena)
-    .then((userCredential) => {
-      alert("¡Inicio de sesión exitoso! Bienvenido Administrador.");
-      console.log("Usuario firmado:", userCredential.user);
-    })
-    .catch((error) => {
-      alert("Error al entrar: Verificar correo o contraseña.");
-      console.error("Código de error:", error.code, error.message);
-    });
-});
-
-  // 4. Escuchar el clic en el botón de iniciar sesión
-document.getElementById('btn-login')?.addEventListener('click', () => {
-  const email = document.getElementById('login-email').value;
-  const contrasena = document.getElementById('login-contrasena').value;
-
-  // Enviar los datos a Firebase para validar al administrador
-  signInWithEmailAndPassword(auth, email, contrasena)
-    .then((userCredential) => {
-      alert("¡Inicio de sesión exitoso! Bienvenido Administrador.");
-      console.log("Usuario firmado:", userCredential.user);
-    })
-    .catch((error) => {
-      alert("Error al entrar: Verificar correo o contraseña.");
-      console.error("Código de error:", error.code, error.message);
-    });
-});
-
-    nombre: "Prenda de Ropa de Marca",
-    precio: "$25.00",
-    descripcion: "Ropa de marca original, como nueva.",
-    imagen: "https://via.placeholder.com/150" // Aquí pondremos tu enlace real de ImgBB más adelante
-  }
+// 1. Listado de productos en tu inventario
+const products = [
+    {
+        name: "NutriBullet",
+        price: "$50.00",
+        description: "Food processor in excellent condition.",
+        image: "https://via.placeholder.com/150"
+    },
+    {
+        name: "Designer Clothing Item",
+        price: "$25.00",
+        description: "Original brand-name clothing, like new.",
+        image: "https://via.placeholder.com/150"
+    }
 ];
 
-// Función para mostrar los productos en la página web
-function cargarProductos() {
-  const contenedor = document.getElementById("contenedor-productos");
-  if (!contenedor) return;
+// 2. Función para mostrar los productos en la tienda de forma automática
+function loadProducts() {
+    const container = document.getElementById("contenedor-productos");
+    if (!container) return;
 
-  contenedor.innerHTML = ""; // Limpiar contenedor
+    container.innerHTML = ""; // Limpiar contenedor
 
-  productos.forEach(producto => {
-    // Crear la tarjeta del producto
-    const tarjeta = document.createElement("div");
-    tarjeta.className = "tarjeta-producto";
+    products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.style = "border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; text-align: center; width: 200px;";
 
-    tarjeta.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.nombre}">
-      <h3>${producto.nombre}</h3>
-      <p>${producto.descripcion}</p>
-      <p class="precio">${producto.precio}</p>
-      <button style="background: #28a745; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; width: 100%;">Comprar</button>
-    `;
-
-    contenedor.appendChild(tarjeta);
-  });
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" style="max-width: 100%; height: auto;">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p class="price" style="font-weight: bold; color: #28a745;">${product.price}</p>
+            <button style="background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Comprar</button>
+        `;
+        container.appendChild(card);
+    });
 }
 
-// Ejecutar la función cuando la página termine de cargar
-document.addEventListener("DOMContentLoaded", cargarProductos);
-// 4. Escuchar el clic en el botón de iniciar sesión
-document.getElementById('btn-login')?.addEventListener('click', () => {
-  const email = document.getElementById('login-email').value;
-  const contrasena = document.getElementById('login-contrasena').value;
+// Ejecutar la carga de productos cuando la página termine de abrirse
+document.addEventListener("DOMContentLoaded", loadProducts);
 
-  // Enviar los datos a Firebase para validar al administrador
-  signInWithEmailAndPassword(auth, email, contrasena)
-    .then((userCredential) => {
-      alert("¡Inicio de sesión exitoso! Bienvenido Administrador.");
-      console.log("Usuario firmado:", userCredential.user);
-      // Aquí podremos ocultar el formulario o mostrar opciones exclusivas más adelante
-    })
-    .catch((error) => {
-      alert("Error al entrar: Verificar correo o contraseña.");
-      console.error("Código de error:", error.code, error.message);
-    });
-});
-// ==========================================
-// 3. SISTEMA DE AUTENTICACIÓN (LOGIN)
-// ==========================================
-
+// ==========================================================
+// 3. SISTEMA DE AUTENTICACIÓN (LOGIN) - COMPATIBLE CON TU HTML
+// ==========================================================
 document.addEventListener('DOMContentLoaded', () => {
-    const formularioLogin = document.querySelector('form') || document.getElementById('login-form');
-    
-    if (formularioLogin) {
-        formularioLogin.addEventListener('submit', (e) => {
+    const loginForm = document.getElementById('login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            // Evita que la página se recargue y desaparezcan tus datos
             e.preventDefault();
-            
-            const correo = formularioLogin.querySelector('input[type="email"]').value;
-            const contrasena = formularioLogin.querySelector('input[type="password"]').value;
-            const boton = formularioLogin.querySelector('button');
 
-            const textoOriginal = boton.textContent;
-            boton.textContent = "Conectando...";
-            boton.disabled = true;
+            const mail = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const button = document.getElementById('btn-login');
 
-            firebase.auth().signInWithEmailAndPassword(correo, contrasena)
+            const originalText = button.textContent;
+            button.textContent = "Conectando...";
+            button.disabled = true;
+
+            // Conectar directamente con el Firebase que inicializaste en el HTML
+            firebase.auth().signInWithEmailAndPassword(mail, password)
                 .then((userCredential) => {
                     alert("¡Bienvenido Administrador! Conexión exitosa.");
-                    window.location.href = "dashboard.html"; 
+                    // Aquí puedes redirigir o mostrar opciones de administración
+                    button.textContent = originalText;
+                    button.disabled = false;
                 })
                 .catch((error) => {
-                    alert("Error al entrar: " + error.message);
-                    boton.textContent = textoOriginal;
-                    boton.disabled = false;
+                    alert("Error al iniciar sesión: " + error.message);
+                    button.textContent = originalText;
+                    button.disabled = false;
                 });
         });
     }
