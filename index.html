@@ -1,42 +1,71 @@
-<script type="module">
-    // 1. Importaciones
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Duckie Marketplace</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #formulario { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; max-width: 400px; }
+        input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
 
-    // 2. Configuración de Firebase (REEMPLAZA CON TUS DATOS)
-    const firebaseConfig = {
-        apiKey: "TU_API_KEY",
-        authDomain: "TU_PROJECT_ID.firebaseapp.com",
-        projectId: "TU_PROJECT_ID",
-        storageBucket: "TU_PROJECT_ID.appspot.com",
-        messagingSenderId: "TU_SENDER_ID",
-        appId: "TU_APP_ID"
-    };
+    <div id="formulario">
+        <h3>Agregar Nuevo Patito</h3>
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="precioProducto" placeholder="Precio ($)">
+        <input type="text" id="urlImagen" placeholder="URL de la imagen (ej: link de imgbb)">
+        <button id="btnGuardar">Guardar Producto</button>
+    </div>
 
-    // 3. Inicialización
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    <div id="listaProductos"></div>
 
-    // 4. Lógica del botón Guardar
-    const btnGuardar = document.getElementById('btnGuardar');
-    
-    btnGuardar.addEventListener('click', () => {
-        const nombre = document.getElementById('nombreProducto').value;
-        const precio = document.getElementById('precioProducto').value;
-        const urlImagen = document.getElementById('urlImagen').value;
+    <script type="module">
+        // 1. Importaciones
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
-        addDoc(collection(db, "productos"), {
-            nombre: nombre,
-            precio: precio,
-            imagen: urlImagen
-        }).then(() => {
-            alert("Producto guardado con éxito");
-            // Limpiamos los campos después de guardar
-            document.getElementById('nombreProducto').value = '';
-            document.getElementById('precioProducto').value = '';
-            document.getElementById('urlImagen').value = '';
-        }).catch((error) => {
-            console.error("Error al guardar: ", error);
+        // 2. Configuración de Firebase (Tus claves reales)
+        const firebaseConfig = {
+            apiKey: "AIzaSy0nzSPa7B3_V0igV6FbyySUY65dl6vqQ2E",
+            authDomain: "duckie-marketplace.firebaseapp.com",
+            projectId: "duckie-marketplace",
+            storageBucket: "duckie-marketplace.appspot.com",
+            messagingSenderId: "420270054054",
+            appId: "1:420270054054:web:f13a3c50533a14f3f47267"
+        };
+
+        // 3. Inicialización
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 4. Lógica del botón Guardar
+        const btnGuardar = document.getElementById('btnGuardar');
+        
+        btnGuardar.addEventListener('click', () => {
+            const nombre = document.getElementById('nombreProducto').value;
+            const precio = document.getElementById('precioProducto').value;
+            const urlImagen = document.getElementById('urlImagen').value;
+
+            if (nombre && precio && urlImagen) {
+                addDoc(collection(db, "productos"), {
+                    nombre: nombre,
+                    precio: precio,
+                    imagen: urlImagen
+                }).then(() => {
+                    alert("Producto guardado con éxito");
+                    document.getElementById('nombreProducto').value = '';
+                    document.getElementById('precioProducto').value = '';
+                    document.getElementById('urlImagen').value = '';
+                }).catch((error) => {
+                    console.error("Error al guardar: ", error);
+                });
+            } else {
+                alert("Por favor, llena todos los campos");
+            }
         });
-    });
-</script>
+    </script>
+</body>
+</html>
