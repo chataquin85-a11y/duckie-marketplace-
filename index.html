@@ -3,15 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Duckie Marketplace</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #f4f4f4; }
+        header { background-color: #ffcc00; padding: 20px; text-align: center; font-size: 1.5rem; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; }
+        .form-section { background: #eee; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        input { display: block; width: 100%; margin-bottom: 10px; padding: 8px; }
+        button { background: #333; color: white; border: none; padding: 10px; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a Duckie Marketplace</h1>
-    <p>Cargando conexión con Firebase...</p>
 
+    <header>Duckie Marketplace 🦆</header>
+
+    <div class="container">
+        <!-- Formulario para agregar productos -->
+        <div class="form-section">
+            <h3>Agregar Nuevo Patito</h3>
+            <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+            <input type="number" id="precioProducto" placeholder="Precio ($)">
+            <button onclick="guardarProducto()">Guardar Producto</button>
+        </div>
+
+        <h2>Productos en Bazar</h2>
+        <div id="listaProductos"></div>
+    </div>
+
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-
     <script>
       const firebaseConfig = {
         apiKey: "AIzaSyDnzSpa7B3_V0igV6FbyySUY6Sdl6vqq2E",
@@ -21,17 +41,16 @@
         messagingSenderId: "420270054054",
         appId: "1:420270054054:web:f13a3c50533a14f3f47267"
       };
-
       firebase.initializeApp(firebaseConfig);
-    </script>
+      const db = firebase.firestore();
 
-    <script>
-      try {
-        firebase.firestore();
-        document.body.innerHTML += "<h3 style='color:green;'>¡Firebase está conectado!</h3>";
-      } catch (error) {
-        document.body.innerHTML += "<h3 style='color:red;'>Error al conectar Firebase.</h3>";
-        console.error(error);
+      function guardarProducto() {
+        const nombre = document.getElementById('nombreProducto').value;
+        const precio = document.getElementById('precioProducto').value;
+        db.collection("productos").add({
+            nombre: nombre,
+            precio: precio
+        }).then(() => alert("¡Patito guardado en la base de datos!"));
       }
     </script>
 </body>
