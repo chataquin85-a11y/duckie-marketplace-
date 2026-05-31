@@ -10,6 +10,7 @@
         .form-section { background: #eee; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
         input { display: block; width: 100%; margin-bottom: 10px; padding: 8px; }
         button { background: #333; color: white; border: none; padding: 10px; cursor: pointer; }
+        .producto { border-bottom: 1px solid #ccc; padding: 10px 0; }
     </style>
 </head>
 <body>
@@ -42,10 +43,25 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // NUEVA FUNCIÓN PARA MOSTRAR PRODUCTOS
+    function cargarProductos() {
+        db.collection("productos").onSnapshot((snapshot) => {
+            const lista = document.getElementById('listaProductos');
+            lista.innerHTML = '';
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                lista.innerHTML += `<div class="producto"><strong>${data.nombre}</strong> - $${data.precio}</div>`;
+            });
+        });
+    }
+
     function guardarProducto() {
         const nombre = document.getElementById('nombreProducto').value;
         const precio = document.getElementById('precioProducto').value;
         
+        // NOTA: Si pusiste las reglas en 'allow write: if false', 
+        // esto te dará error al intentar guardar. 
+        // Cámbialo a 'if true' en Firebase cuando quieras publicar nuevos.
         db.collection("productos").add({
             nombre: nombre,
             precio: precio
@@ -53,10 +69,11 @@
             alert("Patito guardado!");
             document.getElementById('nombreProducto').value = '';
             document.getElementById('precioProducto').value = '';
-        }).catch((error) => {
-            alert("Error: " + error.message);
         });
     }
+
+    // Llamar a la función al cargar la página
+    cargarProductos();
 </script>
 </body>
 </html>
