@@ -14,44 +14,43 @@
 </head>
 <body>
 
-    <header>Duckie Marketplace 🦆</header>
+<header>Duckie Marketplace</header>
 
-    <div class="container">
-        <!-- Formulario para agregar productos -->
-        <div class="form-section">
-            <h3>Agregar Nuevo Patito</h3>
-            <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-            <input type="number" id="precioProducto" placeholder="Precio ($)">
-            <button onclick="guardarProducto()">Guardar Producto</button>
-        </div>
-
-        <h2>Productos en Bazar</h2>
-        <div id="listaProductos"></div>
+<div class="container">
+    <div class="form-section">
+        <h3>Agregar Nuevo Patito</h3>
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="precioProducto" placeholder="Precio ($)">
+        <button onclick="guardarProducto()">Guardar Producto</button>
     </div>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyDnzSpa7B3_V0igV6FbyySUY6Sdl6vqq2E",
+    <h2>Productos en Bazar</h2>
+    <div id="listaProductos"></div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AizaSyDnzSpa7B3_V0igV6fbyySUY65dl6vqq2E",
         authDomain: "duckie-marketplace.firebaseapp.com",
         projectId: "duckie-marketplace",
-        storageBucket: "duckie-marketplace.firebasestorage.app",
+        storageBucket: "duckie-marketplace.appspot.com",
         messagingSenderId: "420270054054",
-        appId: "1:420270054054:web:f13a3c50533a14f3f47267"
-      };
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
+        appId: "1:420270054054:web:f13a3c58533a14f3f47267"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-      function guardarProducto() {
+    function guardarProducto() {
         const nombre = document.getElementById('nombreProducto').value;
         const precio = document.getElementById('precioProducto').value;
         db.collection("productos").add({
             nombre: nombre,
             precio: precio
-        }).then(() => alert("¡Patito guardado en la base de datos!"));
-      }
-    </script>
+        }).then(() => alert("Patito guardado en la base de datos!"));
+    }
+</script>
 </body>
 </html>
