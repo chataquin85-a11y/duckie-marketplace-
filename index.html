@@ -1,7 +1,7 @@
 <script type="module">
-    // 1. Importaciones (incluyendo onSnapshot y query)
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+    // 1. Importaciones corregidas sin https:
+    import { initializeApp } from "//www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query } from "//www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
     // 2. Configuración de Firebase
     const firebaseConfig = {
@@ -21,7 +21,7 @@
     const listaProductos = document.getElementById('listaProductos');
 
     onSnapshot(collection(db, "productos"), (snapshot) => {
-        listaProductos.innerHTML = ""; // Limpiamos la lista para actualizar
+        listaProductos.innerHTML = "";
         snapshot.forEach((doc) => {
             const prod = doc.data();
             listaProductos.innerHTML += `
