@@ -28,7 +28,6 @@
     <div id="listaProductos"></div>
 </div>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 <script>
@@ -46,10 +45,17 @@
     function guardarProducto() {
         const nombre = document.getElementById('nombreProducto').value;
         const precio = document.getElementById('precioProducto').value;
+        
         db.collection("productos").add({
             nombre: nombre,
             precio: precio
-        }).then(() => alert("Patito guardado en la base de datos!"));
+        }).then(() => {
+            alert("Patito guardado!");
+            document.getElementById('nombreProducto').value = '';
+            document.getElementById('precioProducto').value = '';
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
     }
 </script>
 </body>
