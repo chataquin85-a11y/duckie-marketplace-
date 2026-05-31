@@ -1,79 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Duckie Marketplace</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #f4f4f4; }
-        header { background-color: #ffcc00; padding: 20px; text-align: center; font-size: 1.5rem; }
-        .container { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; }
-        .form-section { background: #eee; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        input { display: block; width: 100%; margin-bottom: 10px; padding: 8px; }
-        button { background: #333; color: white; border: none; padding: 10px; cursor: pointer; }
-        .producto { border-bottom: 1px solid #ccc; padding: 10px 0; }
+        /* Aquí puedes poner tus estilos */
+        body { font-family: sans-serif; padding: 20px; }
+        #formulario { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; }
+        input { display: block; margin-bottom: 10px; width: 300px; }
     </style>
 </head>
 <body>
 
-<header>Duckie Marketplace</header>
-
-<div class="container">
-    <div class="form-section">
+    <div id="formulario">
         <h3>Agregar Nuevo Patito</h3>
         <input type="text" id="nombreProducto" placeholder="Nombre del producto">
         <input type="number" id="precioProducto" placeholder="Precio ($)">
-        <button onclick="guardarProducto()">Guardar Producto</button>
+        <input type="text" id="urlImagen" placeholder="URL de la imagen (ej: link de imgbb)">
+        <button id="btnGuardar">Guardar Producto</button>
     </div>
 
-    <h2>Productos en Bazar</h2>
     <div id="listaProductos"></div>
-</div>
 
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-<script>
-    const firebaseConfig = {
-        apiKey: "AizaSyDnzSpa7B3_V0igV6fbyySUY65dl6vqq2E",
-        authDomain: "duckie-marketplace.firebaseapp.com",
-        projectId: "duckie-marketplace",
-        storageBucket: "duckie-marketplace.appspot.com",
-        messagingSenderId: "420270054054",
-        appId: "1:420270054054:web:f13a3c58533a14f3f47267"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    <script type="module">
+        // Importa aquí tus funciones de Firebase (initializeApp, getFirestore, etc.)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
-    // NUEVA FUNCIÓN PARA MOSTRAR PRODUCTOS
-    function cargarProductos() {
-        db.collection("productos").onSnapshot((snapshot) => {
-            const lista = document.getElementById('listaProductos');
-            lista.innerHTML = '';
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                lista.innerHTML += `<div class="producto"><strong>${data.nombre}</strong> - $${data.precio}</div>`;
+        // Lógica del botón Guardar
+        const btnGuardar = document.getElementById('btnGuardar');
+        
+        btnGuardar.addEventListener('click', () => {
+            const nombre = document.getElementById('nombreProducto').value;
+            const precio = document.getElementById('precioProducto').value;
+            const urlImagen = document.getElementById('urlImagen').value;
+
+            // Aquí va tu lógica de addDoc (asegúrate de que 'db' esté definido arriba)
+            addDoc(collection(db, "productos"), {
+                nombre: nombre,
+                precio: precio,
+                imagen: urlImagen
+            }).then(() => {
+                alert("Producto guardado con éxito");
+                document.getElementById('nombreProducto').value = '';
+                document.getElementById('precioProducto').value = '';
+                document.getElementById('urlImagen').value = '';
             });
         });
-    }
-
-    function guardarProducto() {
-        const nombre = document.getElementById('nombreProducto').value;
-        const precio = document.getElementById('precioProducto').value;
-        
-        // NOTA: Si pusiste las reglas en 'allow write: if false', 
-        // esto te dará error al intentar guardar. 
-        // Cámbialo a 'if true' en Firebase cuando quieras publicar nuevos.
-        db.collection("productos").add({
-            nombre: nombre,
-            precio: precio
-        }).then(() => {
-            alert("Patito guardado!");
-            document.getElementById('nombreProducto').value = '';
-            document.getElementById('precioProducto').value = '';
-        });
-    }
-
-    // Llamar a la función al cargar la página
-    cargarProductos();
-</script>
+    </script>
 </body>
 </html>
