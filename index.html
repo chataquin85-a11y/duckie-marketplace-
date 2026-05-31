@@ -1,71 +1,62 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Duckie Marketplace</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        #formulario { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; max-width: 400px; }
-        input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; box-sizing: border-box; }
-        button { padding: 10px 15px; cursor: pointer; }
-    </style>
-</head>
-<body>
+<script type="module">
+    // 1. Importaciones (incluyendo onSnapshot y query)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
-    <div id="formulario">
-        <h3>Agregar Nuevo Patito</h3>
-        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-        <input type="number" id="precioProducto" placeholder="Precio ($)">
-        <input type="text" id="urlImagen" placeholder="URL de la imagen (ej: link de imgbb)">
-        <button id="btnGuardar">Guardar Producto</button>
-    </div>
+    // 2. Configuración de Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSy0nzSPa7B3_V0igV6FbyySUY65dl6vqQ2E",
+        authDomain: "duckie-marketplace.firebaseapp.com",
+        projectId: "duckie-marketplace",
+        storageBucket: "duckie-marketplace.appspot.com",
+        messagingSenderId: "420270054054",
+        appId: "1:420270054054:web:f13a3c50533a14f3f47267"
+    };
 
-    <div id="listaProductos"></div>
+    // 3. Inicialización
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    <script type="module">
-        // 1. Importaciones
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+    // 4. Leer y mostrar productos en tiempo real
+    const listaProductos = document.getElementById('listaProductos');
 
-        // 2. Configuración de Firebase (Tus claves reales)
-        const firebaseConfig = {
-            apiKey: "AIzaSy0nzSPa7B3_V0igV6FbyySUY65dl6vqQ2E",
-            authDomain: "duckie-marketplace.firebaseapp.com",
-            projectId: "duckie-marketplace",
-            storageBucket: "duckie-marketplace.appspot.com",
-            messagingSenderId: "420270054054",
-            appId: "1:420270054054:web:f13a3c50533a14f3f47267"
-        };
-
-        // 3. Inicialización
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // 4. Lógica del botón Guardar
-        const btnGuardar = document.getElementById('btnGuardar');
-        
-        btnGuardar.addEventListener('click', () => {
-            const nombre = document.getElementById('nombreProducto').value;
-            const precio = document.getElementById('precioProducto').value;
-            const urlImagen = document.getElementById('urlImagen').value;
-
-            if (nombre && precio && urlImagen) {
-                addDoc(collection(db, "productos"), {
-                    nombre: nombre,
-                    precio: precio,
-                    imagen: urlImagen
-                }).then(() => {
-                    alert("Producto guardado con éxito");
-                    document.getElementById('nombreProducto').value = '';
-                    document.getElementById('precioProducto').value = '';
-                    document.getElementById('urlImagen').value = '';
-                }).catch((error) => {
-                    console.error("Error al guardar: ", error);
-                });
-            } else {
-                alert("Por favor, llena todos los campos");
-            }
+    onSnapshot(collection(db, "productos"), (snapshot) => {
+        listaProductos.innerHTML = ""; // Limpiamos la lista para actualizar
+        snapshot.forEach((doc) => {
+            const prod = doc.data();
+            listaProductos.innerHTML += `
+                <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
+                    <img src="${prod.imagen}" style="width: 100px; display: block; margin-bottom: 5px;">
+                    <p style="margin: 0;"><strong>${prod.nombre}</strong></p>
+                    <p style="margin: 0; color: green;">$${prod.precio}</p>
+                </div>
+            `;
         });
-    </script>
-</body>
-</html>
+    });
+
+    // 5. Lógica del botón Guardar
+    const btnGuardar = document.getElementById('btnGuardar');
+    
+    btnGuardar.addEventListener('click', () => {
+        const nombre = document.getElementById('nombreProducto').value;
+        const precio = document.getElementById('precioProducto').value;
+        const urlImagen = document.getElementById('urlImagen').value;
+
+        if (nombre && precio && urlImagen) {
+            addDoc(collection(db, "productos"), {
+                nombre: nombre,
+                precio: precio,
+                imagen: urlImagen
+            }).then(() => {
+                alert("Producto guardado con éxito");
+                document.getElementById('nombreProducto').value = '';
+                document.getElementById('precioProducto').value = '';
+                document.getElementById('urlImagen').value = '';
+            }).catch((error) => {
+                console.error("Error al guardar: ", error);
+            });
+        } else {
+            alert("Por favor, llena todos los campos");
+        }
+    });
+</script>
