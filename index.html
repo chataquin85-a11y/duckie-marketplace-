@@ -1,52 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Duckie Marketplace</title>
-    <style>
-        /* Aquí puedes poner tus estilos */
-        body { font-family: sans-serif; padding: 20px; }
-        #formulario { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; }
-        input { display: block; margin-bottom: 10px; width: 300px; }
-    </style>
-</head>
-<body>
+<script type="module">
+    // 1. Importaciones
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
-    <div id="formulario">
-        <h3>Agregar Nuevo Patito</h3>
-        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-        <input type="number" id="precioProducto" placeholder="Precio ($)">
-        <input type="text" id="urlImagen" placeholder="URL de la imagen (ej: link de imgbb)">
-        <button id="btnGuardar">Guardar Producto</button>
-    </div>
+    // 2. Configuración de Firebase (REEMPLAZA CON TUS DATOS)
+    const firebaseConfig = {
+        apiKey: "TU_API_KEY",
+        authDomain: "TU_PROJECT_ID.firebaseapp.com",
+        projectId: "TU_PROJECT_ID",
+        storageBucket: "TU_PROJECT_ID.appspot.com",
+        messagingSenderId: "TU_SENDER_ID",
+        appId: "TU_APP_ID"
+    };
 
-    <div id="listaProductos"></div>
+    // 3. Inicialización
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    <script type="module">
-        // Importa aquí tus funciones de Firebase (initializeApp, getFirestore, etc.)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+    // 4. Lógica del botón Guardar
+    const btnGuardar = document.getElementById('btnGuardar');
+    
+    btnGuardar.addEventListener('click', () => {
+        const nombre = document.getElementById('nombreProducto').value;
+        const precio = document.getElementById('precioProducto').value;
+        const urlImagen = document.getElementById('urlImagen').value;
 
-        // Lógica del botón Guardar
-        const btnGuardar = document.getElementById('btnGuardar');
-        
-        btnGuardar.addEventListener('click', () => {
-            const nombre = document.getElementById('nombreProducto').value;
-            const precio = document.getElementById('precioProducto').value;
-            const urlImagen = document.getElementById('urlImagen').value;
-
-            // Aquí va tu lógica de addDoc (asegúrate de que 'db' esté definido arriba)
-            addDoc(collection(db, "productos"), {
-                nombre: nombre,
-                precio: precio,
-                imagen: urlImagen
-            }).then(() => {
-                alert("Producto guardado con éxito");
-                document.getElementById('nombreProducto').value = '';
-                document.getElementById('precioProducto').value = '';
-                document.getElementById('urlImagen').value = '';
-            });
+        addDoc(collection(db, "productos"), {
+            nombre: nombre,
+            precio: precio,
+            imagen: urlImagen
+        }).then(() => {
+            alert("Producto guardado con éxito");
+            // Limpiamos los campos después de guardar
+            document.getElementById('nombreProducto').value = '';
+            document.getElementById('precioProducto').value = '';
+            document.getElementById('urlImagen').value = '';
+        }).catch((error) => {
+            console.error("Error al guardar: ", error);
         });
-    </script>
-</body>
-</html>
+    });
+</script>
