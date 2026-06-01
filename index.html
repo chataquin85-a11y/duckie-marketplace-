@@ -5,70 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-        input { display: block; width: 100%; margin-bottom: 10px; padding: 8px; }
-        button { background: #007bff; color: white; padding: 10px; border: none; cursor: pointer; }
-        #listaProductos { margin-top: 20px; }
+        body { font-family: 'Arial', sans-serif; text-align: center; padding: 40px; background-color: #f4f4f9; }
+        .marketplace-container { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .product-card { margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px; }
+        #paypal-button-container { margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <h1>Duckie Marketplace</h1>
+    <div class="marketplace-container">
+        <h1>Duckie Marketplace</h1>
+        <div class="product-card">
+            <h2>Producto en Venta</h2>
+            <p>Descripción detallada de tu producto aquí.</p>
+            <p><strong>Precio: $10.00 USD</strong></p>
+            <div id="paypal-button-container"></div>
+        </div>
+    </div>
 
-    <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-    <input type="number" id="precioProducto" placeholder="Precio">
-    <input type="text" id="urlImagen" placeholder="URL de la imagen">
-    <button id="btnGuardar">Guardar Producto</button>
-
-    <div id="listaProductos"></div>
-
-    <script type="module">
-        import { initializeApp } from "//www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot } from "//www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSy0nzSPa7B3_V0igV6FbyySUY65dl6vqQ2E",
-            authDomain: "duckie-marketplace.firebaseapp.com",
-            projectId: "duckie-marketplace",
-            storageBucket: "duckie-marketplace.appspot.com",
-            messagingSenderId: "420270054054",
-            appId: "1:420270054054:web:f13a3c50533a14f3f47267"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Leer productos en tiempo real
-        const listaProductos = document.getElementById('listaProductos');
-        onSnapshot(collection(db, "productos"), (snapshot) => {
-            listaProductos.innerHTML = "";
-            snapshot.forEach((doc) => {
-                const prod = doc.data();
-                listaProductos.innerHTML += `
-                    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
-                        <img src="${prod.imagen}" style="width: 100px; display: block;">
-                        <p><strong>${prod.nombre}</strong> - $${prod.precio}</p>
-                    </div>
-                `;
-            });
-        });
-
-        // Guardar productos
-        document.getElementById('btnGuardar').addEventListener('click', async () => {
-            const nombre = document.getElementById('nombreProducto').value;
-            const precio = document.getElementById('precioProducto').value;
-            const urlImagen = document.getElementById('urlImagen').value;
-
-            if (nombre && precio && urlImagen) {
-                await addDoc(collection(db, "productos"), { nombre, precio, imagen: urlImagen });
-                alert("Guardado con éxito");
-                document.getElementById('nombreProducto').value = '';
-                document.getElementById('precioProducto').value = '';
-                document.getElementById('urlImagen').value = '';
-            } else {
-                alert("Llena todos los campos");
+    <script src="https://www.paypal.com/sdk/js?client-id=AUTmiwW5tG1x1p-f4KDPmNo2BIE0tvzN28iQXZhIzKnXxH0IEI6-KDTXJAFg3ohTJ6v5PLO4dwugrbVe&currency=USD"></script>
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{ amount: { value: '10.00' } }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('¡Pago recibido con éxito de ' + details.payer.name.given_name + '!');
+                });
             }
-        });
+        }).render('#paypal-button-container');
     </script>
 </body>
 </html>
