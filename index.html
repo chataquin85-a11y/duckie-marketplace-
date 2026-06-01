@@ -14,39 +14,50 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Leer productos
+    // 4. Leer y mostrar productos en tiempo real
     const listaProductos = document.getElementById('listaProductos');
-    onSnapshot(collection(db, "productos"), (snapshot) => {
-        listaProductos.innerHTML = "";
-        snapshot.forEach((doc) => {
-            const prod = doc.data();
-            listaProductos.innerHTML += `
-                <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
-                    <img src="${prod.imagen}" style="width: 100px; display: block;">
-                    <p><strong>${prod.nombre}</strong> - $${prod.precio}</p>
-                </div>
-            `;
+
+    if (listaProductos) {
+        onSnapshot(collection(db, "productos"), (snapshot) => {
+            listaProductos.innerHTML = "";
+            snapshot.forEach((doc) => {
+                const prod = doc.data();
+                listaProductos.innerHTML += `
+                    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
+                        <img src="${prod.imagen}" style="width: 100px; display: block;">
+                        <p><strong>${prod.nombre}</strong> - $${prod.precio}</p>
+                    </div>
+                `;
+            });
         });
-    });
+    }
 
-    // Guardar productos
-    document.getElementById('btnGuardar').addEventListener('click', async () => {
-        const nombre = document.getElementById('nombreProducto').value;
-        const precio = document.getElementById('precioProducto').value;
-        const urlImagen = document.getElementById('urlImagen').value;
+    // 5. Lógica del botón Guardar
+    const btnGuardar = document.getElementById('btnGuardar');
+    if (btnGuardar) {
+        btnGuardar.addEventListener('click', async () => {
+            const nombre = document.getElementById('nombreProducto').value;
+            const precio = document.getElementById('precioProducto').value;
+            const urlImagen = document.getElementById('urlImagen').value;
 
-        if (nombre && precio && urlImagen) {
-            try {
-                await addDoc(collection(db, "productos"), { nombre, precio, imagen: urlImagen });
-                alert("Guardado con éxito");
-                document.getElementById('nombreProducto').value = '';
-                document.getElementById('precioProducto').value = '';
-                document.getElementById('urlImagen').value = '';
-            } catch (e) {
-                console.error("Error: ", e);
+            if (nombre && precio && urlImagen) {
+                try {
+                    await addDoc(collection(db, "productos"), { 
+                        nombre: nombre, 
+                        precio: precio, 
+                        imagen: urlImagen 
+                    });
+                    alert("Producto guardado con éxito");
+                    document.getElementById('nombreProducto').value = '';
+                    document.getElementById('precioProducto').value = '';
+                    document.getElementById('urlImagen').value = '';
+                } catch (e) {
+                    console.error("Error al guardar: ", e);
+                    alert("Error al guardar el producto");
+                }
+            } else {
+                alert("Por favor, llena todos los campos");
             }
-        } else {
-            alert("Llena todos los campos");
-        }
-    });
+        });
+    }
 </script>
