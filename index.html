@@ -7,7 +7,6 @@
     <style>
         body { 
             font-family: sans-serif; 
-            /* Tu imagen de fondo */
             background-image: url('https://i.ibb.co/b5qyrqrN/image.jpg');
             background-size: cover;
             background-position: center;
@@ -38,16 +37,34 @@
         <div id="paypal-button-zara"></div>
     </div>
 
+    <div class="product-card">
+        <h3>Suéter Guess Gris</h3>
+        <p class="price">$45.00 USD</p>
+        <div id="paypal-button-guess"></div>
+    </div>
+
+    <div class="product-card">
+        <h3>Suéter H&M Gris</h3>
+        <p class="price">$30.00 USD</p>
+        <div id="paypal-button-hm"></div>
+    </div>
+
     <script src="https://www.paypal.com/sdk/js?client-id=AX6WGj-DnlYMU-YfzsPd3DF89FOORsQrn08QyydnX-i-ilVnf0SisRD4-eA1aK83tPwOy10jNK6-aSW7&currency=USD"></script>
     
     <script>
         window.addEventListener('load', function() {
             if (typeof paypal !== 'undefined') {
-                paypal.Buttons({
-                    createOrder: (data, actions) => {
-                        return actions.order.create({ purchase_units: [{ amount: { value: '60.00' } }] });
-                    }
-                }).render('#paypal-button-zara');
+                const renderBtn = (id, val) => {
+                    paypal.Buttons({
+                        createOrder: (data, actions) => {
+                            return actions.order.create({ purchase_units: [{ amount: { value: val } }] });
+                        }
+                    }).render(id);
+                };
+
+                renderBtn('#paypal-button-zara', '60.00');
+                renderBtn('#paypal-button-guess', '45.00');
+                renderBtn('#paypal-button-hm', '30.00');
             }
         });
     </script>
