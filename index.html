@@ -1,18 +1,15 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
-    <script src="https://www.paypal.com/sdk/js?client-id=AX6WGj-DnlYMU-YfzsPd3DF89FOORsQrn08QyydnX-i-ilVnf0SisRD4-eA1aK83tPwOy10jNK6-aSW7&currency=USD"></script>
-    
     <style>
-        body { font-family: sans-serif; background-image: url('https://i.ibb.co/b5qyrqrN/image.jpg'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat; padding: 20px; text-align: center; }
+        body { font-family: sans-serif; background-image: url('https://i.ibb.co/b5qyrqrN/image.jpg'); background-size: cover; background-position: center; background-attachment: fixed; padding: 20px; text-align: center; }
         .product-card { background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .price { font-weight: bold; margin: 10px 0; color: #333; font-size: 1.2em; }
         h1 { color: white; text-shadow: 2px 2px 4px #000; }
-        /* Forzamos espacio para que el botón exista visiblemente */
-        .paypal-button-container { min-height: 50px; margin-top: 15px; }
+        .pay-btn { display: inline-block; background-color: #ffc439; color: black; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 10px; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -22,46 +19,20 @@
     <div class="product-card">
         <h3>Suéter Zara Man</h3>
         <p class="price">$60.00 USD</p>
-        <div id="paypal-button-zara" class="paypal-button-container"></div>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=TU_CORREO@EJEMPLO.COM&item_name=Sueter+Zara&amount=60.00&currency_code=USD" class="pay-btn">Pagar con PayPal</a>
     </div>
 
     <div class="product-card">
         <h3>Suéter Guess Gris</h3>
         <p class="price">$45.00 USD</p>
-        <div id="paypal-button-guess" class="paypal-button-container"></div>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=TU_CORREO@EJEMPLO.COM&item_name=Sueter+Guess&amount=45.00&currency_code=USD" class="pay-btn">Pagar con PayPal</a>
     </div>
 
     <div class="product-card">
         <h3>Suéter H&M Gris</h3>
         <p class="price">$30.00 USD</p>
-        <div id="paypal-button-hm" class="paypal-button-container"></div>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=TU_CORREO@EJEMPLO.COM&item_name=Sueter+HM&amount=30.00&currency_code=USD" class="pay-btn">Pagar con PayPal</a>
     </div>
 
-    <script>
-        // Esta función se ejecuta inmediatamente cuando el navegador lee el script
-        function renderButtons() {
-            if (typeof paypal !== 'undefined') {
-                paypal.Buttons({
-                    createOrder: (data, actions) => { return actions.order.create({ purchase_units: [{ amount: { value: '60.00' } }] }); }
-                }).render('#paypal-button-zara');
-
-                paypal.Buttons({
-                    createOrder: (data, actions) => { return actions.order.create({ purchase_units: [{ amount: { value: '45.00' } }] }); }
-                }).render('#paypal-button-guess');
-
-                paypal.Buttons({
-                    createOrder: (data, actions) => { return actions.order.create({ purchase_units: [{ amount: '30.00' } }] }); }
-                }).render('#paypal-button-hm');
-            }
-        }
-        
-        // Intentamos renderizar cada 300ms hasta que PayPal cargue
-        let interval = setInterval(() => {
-            if (typeof paypal !== 'undefined') {
-                renderButtons();
-                clearInterval(interval);
-            }
-        }, 300);
-    </script>
 </body>
 </html>
