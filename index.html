@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
     <style>
-        body { font-family: sans-serif; background-color: #f8f9fa; padding: 20px; text-align: center; }
-        .product-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; max-width: 300px; height: auto; border-radius: 8px; margin-bottom: 15px; }
-        .price { font-weight: bold; margin: 10px 0; }
+        body { 
+            font-family: sans-serif; 
+            /* Tu imagen de fondo */
+            background-image: url('https://i.ibb.co/b5qyrqrN/image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            padding: 20px; 
+            text-align: center; 
+        }
+        .product-card { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-radius: 12px; 
+            padding: 20px; 
+            margin: 20px auto; 
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .price { font-weight: bold; margin: 10px 0; color: #333; }
+        h1 { color: white; text-shadow: 2px 2px 4px #000; }
     </style>
 </head>
 <body>
@@ -16,35 +33,21 @@
     <h1>Duckie Marketplace</h1>
 
     <div class="product-card">
-        <img src="https://i.ibb.co/G4mQ5sXv/zara.jpg" alt="Suéter Zara">
         <h3>Suéter Zara Man</h3>
         <p class="price">$60.00 USD</p>
         <div id="paypal-button-zara"></div>
     </div>
 
-    <div class="product-card">
-        <img src="https://i.ibb.co/v4yXY9dg/guess.jpg" alt="Suéter Guess">
-        <h3>Suéter Guess Gris</h3>
-        <p class="price">$45.00 USD</p>
-        <div id="paypal-button-guess"></div>
-    </div>
-
     <script src="https://www.paypal.com/sdk/js?client-id=AX6WGj-DnlYMU-YfzsPd3DF89FOORsQrn08QyydnX-i-ilVnf0SisRD4-eA1aK83tPwOy10jNK6-aSW7&currency=USD"></script>
     
     <script>
-        // Esta función asegura que los botones se carguen al abrir la web
         window.addEventListener('load', function() {
             if (typeof paypal !== 'undefined') {
-                const renderBtn = (id, val) => {
-                    paypal.Buttons({
-                        createOrder: (data, actions) => {
-                            return actions.order.create({ purchase_units: [{ amount: { value: val } }] });
-                        }
-                    }).render(id);
-                };
-
-                renderBtn('#paypal-button-zara', '60.00');
-                renderBtn('#paypal-button-guess', '45.00');
+                paypal.Buttons({
+                    createOrder: (data, actions) => {
+                        return actions.order.create({ purchase_units: [{ amount: { value: '60.00' } }] });
+                    }
+                }).render('#paypal-button-zara');
             }
         });
     </script>
