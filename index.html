@@ -29,35 +29,22 @@
         <div id="paypal-button-guess"></div>
     </div>
 
-    <div class="product-card">
-        <img src="https://i.ibb.co/Rpq2hPK1/hm.jpg" alt="Suéter H&M">
-        <h3>Suéter H&M Gris</h3>
-        <p class="price">$30.00 USD</p>
-        <div id="paypal-button-hm"></div>
-    </div>
-
     <script src="https://www.paypal.com/sdk/js?client-id=AX6WGj-DnlYMU-YfzsPd3DF89FOORsQrn08QyydnX-i-ilVnf0SisRD4-eA1aK83tPwOy10jNK6-aSW7&currency=USD"></script>
     
     <script>
-        // Esperamos a que la página cargue totalmente
+        // Esta función asegura que los botones se carguen al abrir la web
         window.addEventListener('load', function() {
             if (typeof paypal !== 'undefined') {
                 const renderBtn = (id, val) => {
                     paypal.Buttons({
                         createOrder: (data, actions) => {
                             return actions.order.create({ purchase_units: [{ amount: { value: val } }] });
-                        },
-                        onApprove: (data, actions) => {
-                            return actions.order.capture().then(details => {
-                                alert('¡Pago completado con éxito!');
-                            });
                         }
                     }).render(id);
                 };
 
                 renderBtn('#paypal-button-zara', '60.00');
                 renderBtn('#paypal-button-guess', '45.00');
-                renderBtn('#paypal-button-hm', '30.00');
             }
         });
     </script>
