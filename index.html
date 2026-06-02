@@ -5,39 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
     <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; padding: 40px; background-color: #f4f4f9; }
-        .marketplace-container { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #333; }
-        .product-card { margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px; }
-        #paypal-button-container { margin-top: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding: 20px; text-align: center; }
+        .marketplace-container { max-width: 500px; margin: auto; }
+        .product-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .price { font-size: 1.2em; font-weight: bold; color: #2c3e50; margin: 10px 0; }
     </style>
 </head>
 <body>
 
-    <div class="marketplace-container">
-        <h1>Duckie Marketplace</h1>
-        <div class="product-card">
-            <h2>Producto en Venta</h2>
-            <p>Descripción detallada de tu producto aquí.</p>
-            <p><strong>Precio: $10.00 USD</strong></p>
-            <div id="paypal-button-container"></div>
-        </div>
+<div class="marketplace-container">
+    <h1>Duckie Marketplace</h1>
+
+    <div class="product-card">
+        <img src="https://i.ibb.co/G4mQ5sXv/zara.jpg" alt="Suéter Zara Man">
+        <h3>Suéter Zara Man</h3>
+        <p class="price">$60.00 USD</p>
+        <div id="paypal-button-zara"></div>
     </div>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=AUTmiwW5tG1x1p-f4KDPmNo2BIE0tvzN28iQXZhIzKnXxH0IEI6-KDTXJAFg3ohTJ6v5PLO4dwugrbVe&currency=USD"></script>
-    <script>
+    <div class="product-card">
+        <img src="https://i.ibb.co/v4yXY9dg/guess.jpg" alt="Suéter Guess">
+        <h3>Suéter Guess Gris</h3>
+        <p class="price">$45.00 USD</p>
+        <div id="paypal-button-guess"></div>
+    </div>
+
+    <div class="product-card">
+        <img src="https://i.ibb.co/Rpq2hPK1/hm.jpg" alt="Suéter H&M">
+        <h3>Suéter H&M Gris</h3>
+        <p class="price">$30.00 USD</p>
+        <div id="paypal-button-hm"></div>
+    </div>
+
+    <div class="product-card">
+        <img src="https://i.ibb.co/MybND48v/jeans.jpg" alt="Jeans">
+        <h3>Jeans de Mezclilla Azul</h3>
+        <p class="price">$25.00 USD</p>
+        <div id="paypal-button-jeans"></div>
+    </div>
+
+    <div class="product-card">
+        <img src="https://i.ibb.co/zVmzVrTt/nutribullet.jpg" alt="Nutribullet">
+        <h3>Nutribullet</h3>
+        <p class="price">$75.00 USD</p>
+        <div id="paypal-button-nutri"></div>
+    </div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID_AQUI&currency=USD"></script>
+<script>
+    function renderBtn(id, val) {
         paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{ amount: { value: '10.00' } }]
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('¡Pago recibido con éxito de ' + details.payer.name.given_name + '!');
-                });
+            createOrder: (data, actions) => {
+                return actions.order.create({ purchase_units: [{ amount: { value: val } }] });
             }
-        }).render('#paypal-button-container');
-    </script>
+        }).render(id);
+    }
+    renderBtn('#paypal-button-zara', '60.00');
+    renderBtn('#paypal-button-guess', '45.00');
+    renderBtn('#paypal-button-hm', '30.00');
+    renderBtn('#paypal-button-jeans', '25.00');
+    renderBtn('#paypal-button-nutri', '75.00');
+</script>
 </body>
 </html>
