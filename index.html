@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
-    <script src="https://www.paypal.com/sdk/js?client-id=AX6WGj-DnlYMU-YfzsPd3DF89FOORsQrn08QyydnX-i-ilVnf0SisRD4-eA1aK83tPwOy10jNK6-aSW7&currency=USD" defer></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AX6WGj-DnlYMU-YfzsPd3DF89FOORsQrn08QyydnX-i-ilVnf0SisRD4-eA1aK83tPwOy10jNK6-aSW7&currency=USD"></script>
     
     <style>
-        body { font-family: sans-serif; background-image: url('https://i.ibb.co/b5qyrqrN/image.jpg'); background-size: cover; background-position: center; background-attachment: fixed; padding: 20px; text-align: center; }
-        .product-card { background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 20px; margin: 15px auto; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .price { font-weight: bold; margin: 10px 0; color: #333; }
+        body { font-family: sans-serif; background-image: url('https://i.ibb.co/b5qyrqrN/image.jpg'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat; padding: 20px; text-align: center; }
+        .product-card { background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .price { font-weight: bold; margin: 10px 0; color: #333; font-size: 1.2em; }
         h1 { color: white; text-shadow: 2px 2px 4px #000; }
-        /* Damos un tamaño fijo a los contenedores de los botones */
-        .paypal-btn { height: 55px; margin-top: 15px; }
+        /* Forzamos espacio para que el botón exista visiblemente */
+        .paypal-button-container { min-height: 50px; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -22,46 +22,46 @@
     <div class="product-card">
         <h3>Suéter Zara Man</h3>
         <p class="price">$60.00 USD</p>
-        <div id="paypal-button-zara" class="paypal-btn"></div>
+        <div id="paypal-button-zara" class="paypal-button-container"></div>
     </div>
 
     <div class="product-card">
         <h3>Suéter Guess Gris</h3>
         <p class="price">$45.00 USD</p>
-        <div id="paypal-button-guess" class="paypal-btn"></div>
+        <div id="paypal-button-guess" class="paypal-button-container"></div>
     </div>
 
     <div class="product-card">
         <h3>Suéter H&M Gris</h3>
         <p class="price">$30.00 USD</p>
-        <div id="paypal-button-hm" class="paypal-btn"></div>
+        <div id="paypal-button-hm" class="paypal-button-container"></div>
     </div>
 
     <script>
-        // Usamos un pequeño intervalo para asegurar que PayPal esté listo antes de renderizar
-        const checkPayPal = setInterval(() => {
+        // Esta función se ejecuta inmediatamente cuando el navegador lee el script
+        function renderButtons() {
             if (typeof paypal !== 'undefined') {
-                clearInterval(checkPayPal);
-                
                 paypal.Buttons({
-                    createOrder: (data, actions) => {
-                        return actions.order.create({ purchase_units: [{ amount: { value: '60.00' } }] });
-                    }
+                    createOrder: (data, actions) => { return actions.order.create({ purchase_units: [{ amount: { value: '60.00' } }] }); }
                 }).render('#paypal-button-zara');
 
                 paypal.Buttons({
-                    createOrder: (data, actions) => {
-                        return actions.order.create({ purchase_units: [{ amount: { value: '45.00' } }] });
-                    }
+                    createOrder: (data, actions) => { return actions.order.create({ purchase_units: [{ amount: { value: '45.00' } }] }); }
                 }).render('#paypal-button-guess');
 
                 paypal.Buttons({
-                    createOrder: (data, actions) => {
-                        return actions.order.create({ purchase_units: [{ amount: { value: '30.00' } }] });
-                    }
+                    createOrder: (data, actions) => { return actions.order.create({ purchase_units: [{ amount: '30.00' } }] }); }
                 }).render('#paypal-button-hm');
             }
-        }, 500); // Revisa cada medio segundo si PayPal ya cargó
+        }
+        
+        // Intentamos renderizar cada 300ms hasta que PayPal cargue
+        let interval = setInterval(() => {
+            if (typeof paypal !== 'undefined') {
+                renderButtons();
+                clearInterval(interval);
+            }
+        }, 300);
     </script>
 </body>
 </html>
