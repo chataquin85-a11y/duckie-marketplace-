@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
     <style>
-        /* Fondo con tu imagen original */
         body { 
-            font-family: sans-serif; 
-            background-image: url('https://i.ibb.co/3s8sX1S/background.jpg'); 
+            font-family: 'Segoe UI', sans-serif; 
+            background: url('https://i.ibb.co/6P0D9h9/image-original.jpg') no-repeat center center fixed; 
             background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed; 
-            padding: 20px; 
-            text-align: center; 
+            margin: 0; padding: 20px; text-align: center; color: #333;
         }
-        .product-card { background: rgba(255, 255, 255, 0.9); border-radius: 15px; padding: 20px; margin: 20px auto; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .gallery { display: flex; overflow-x: auto; gap: 10px; margin-bottom: 10px; padding-bottom: 5px; }
-        .gallery img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; flex-shrink: 0; border: 2px solid #ddd; }
-        h1 { color: white; text-shadow: 2px 2px 4px #000; }
-        .price { font-size: 1.5em; color: #2ecc71; font-weight: bold; margin: 10px 0; }
-        .pay-btn { display: block; background-color: #ffc439; padding: 15px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 15px; color: black; }
+        h1 { color: #fff; text-shadow: 2px 2px 8px #000; font-size: 2.5em; margin-bottom: 30px; }
+        .product-card { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 20px; padding: 25px; margin: 20px auto; 
+            max-width: 450px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .gallery { display: flex; gap: 10px; justify-content: center; margin: 15px 0; overflow-x: auto; }
+        .gallery img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; border: 2px solid #ddd; }
+        .price { font-size: 1.6em; color: #27ae60; font-weight: bold; margin: 10px 0; }
+        .description { font-size: 0.95em; color: #555; margin-bottom: 10px; line-height: 1.4; text-align: left; }
+        .pay-btn { display: block; background: #ffc439; padding: 12px; border-radius: 50px; font-weight: bold; text-decoration: none; color: black; transition: 0.3s; }
+        .pay-btn:hover { background: #e0ac2d; }
     </style>
 </head>
 <body>
@@ -30,53 +32,58 @@
     <div class="product-card">
         <h3>Suéter Guess</h3>
         <div class="gallery">
-            <img src="IMG_2441.jpeg" alt="Guess 1">
-            <img src="IMG_2443.jpeg" alt="Guess 2">
+            <img src="IMG_2441.jpeg" alt="G1">
+            <img src="IMG_2443.jpeg" alt="G2">
         </div>
+        <p class="description">Chamarra de punto gris suave, talla L, con el icónico logotipo de Guess en relieve. Cierre de cremallera metálica completa. Perfecto estado.</p>
         <p class="price">$45.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sueter+Guess&amount=45.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sueter+Guess&amount=45.00&currency_code=USD" class="pay-btn">Comprar con PayPal</a>
     </div>
 
     <div class="product-card">
         <h3>Zara Man</h3>
         <div class="gallery">
-            <img src="IMG_2444.jpeg" alt="Zara 1">
-            <img src="IMG_2445.jpeg" alt="Zara 2">
-            <img src="IMG_2446.jpeg" alt="Zara 3">
+            <img src="IMG_2444.jpeg" alt="Z1">
+            <img src="IMG_2445.jpeg" alt="Z2">
+            <img src="IMG_2446.jpeg" alt="Z3">
         </div>
+        <p class="description">Chamarra Zara Man acolchada. Estilo moderno y elegante, ideal para cualquier ocasión. Impecable.</p>
         <p class="price">$60.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Zara+Man&amount=60.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Zara+Man&amount=60.00&currency_code=USD" class="pay-btn">Comprar con PayPal</a>
     </div>
 
     <div class="product-card">
         <h3>Sudadera H&M</h3>
         <div class="gallery">
-            <img src="image1.jpeg" alt="Sudadera 1">
-            <img src="image2.jpeg" alt="Sudadera 2">
-            <img src="image3.jpeg" alt="Sudadera 3">
+            <img src="image1.jpeg" alt="S1">
+            <img src="image2.jpeg" alt="S2">
+            <img src="image3.jpeg" alt="S3">
         </div>
+        <p class="description">Sudadera H&M en talla M. Material cómodo y duradero, perfecta para el uso diario o ejercicio.</p>
         <p class="price">$30.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sudadera+HM&amount=30.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sudadera+HM&amount=30.00&currency_code=USD" class="pay-btn">Comprar con PayPal</a>
     </div>
 
     <div class="product-card">
         <h3>Nutribullet</h3>
         <div class="gallery">
-            <img src="image12.jpeg" alt="Nutri 1">
-            <img src="image14.jpeg" alt="Nutri 2">
+            <img src="image12.jpeg" alt="N1">
+            <img src="image14.jpeg" alt="N2">
         </div>
+        <p class="description">Extractor Nutribullet potente para tus batidos y jugos saludables. Compacto y fácil de limpiar.</p>
         <p class="price">$80.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Nutribullet&amount=80.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Nutribullet&amount=80.00&currency_code=USD" class="pay-btn">Comprar con PayPal</a>
     </div>
 
     <div class="product-card">
-        <h3>Pantalón Straight Fit (36/34)</h3>
+        <h3>Pantalón Straight Fit</h3>
         <div class="gallery">
-            <img src="image18.jpeg" alt="Pant 1">
-            <img src="image20.jpeg" alt="Pant 2">
+            <img src="image18.jpeg" alt="P1">
+            <img src="image20.jpeg" alt="P2">
         </div>
+        <p class="description">Pantalón Straight Fit, talla 36/34. Corte clásico y cómodo, ideal para un look casual o formal.</p>
         <p class="price">$25.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Pantalon+Straight&amount=25.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Pantalon+Straight&amount=25.00&currency_code=USD" class="pay-btn">Comprar con PayPal</a>
     </div>
 
 </body>
