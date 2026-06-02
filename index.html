@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
     <style>
-        /* Aquí configuramos tu fondo personalizado */
+        /* Fondo con tu imagen original */
         body { 
             font-family: sans-serif; 
             background-image: url('https://i.ibb.co/3s8sX1S/background.jpg'); 
@@ -15,8 +15,9 @@
             padding: 20px; 
             text-align: center; 
         }
-        .product-card { background: rgba(255, 255, 255, 0.9); border-radius: 15px; padding: 20px; margin: 20px auto; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); color: #333; }
-        .product-card img { width: 100%; height: auto; border-radius: 10px; }
+        .product-card { background: rgba(255, 255, 255, 0.9); border-radius: 15px; padding: 20px; margin: 20px auto; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .gallery { display: flex; overflow-x: auto; gap: 10px; margin-bottom: 10px; padding-bottom: 5px; }
+        .gallery img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; flex-shrink: 0; border: 2px solid #ddd; }
         h1 { color: white; text-shadow: 2px 2px 4px #000; }
         .price { font-size: 1.5em; color: #2ecc71; font-weight: bold; margin: 10px 0; }
         .pay-btn { display: block; background-color: #ffc439; padding: 15px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 15px; color: black; }
@@ -27,38 +28,55 @@
     <h1>Duckie Marketplace</h1>
 
     <div class="product-card">
-        <img src="IMG_2441.jpeg" alt="Producto 1">
-        <h3>Nutribullet Juicer</h3>
+        <h3>Suéter Guess</h3>
+        <div class="gallery">
+            <img src="IMG_2441.jpeg" alt="Guess 1">
+            <img src="IMG_2443.jpeg" alt="Guess 2">
+        </div>
+        <p class="price">$45.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sueter+Guess&amount=45.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+    </div>
+
+    <div class="product-card">
+        <h3>Zara Man</h3>
+        <div class="gallery">
+            <img src="IMG_2444.jpeg" alt="Zara 1">
+            <img src="IMG_2445.jpeg" alt="Zara 2">
+            <img src="IMG_2446.jpeg" alt="Zara 3">
+        </div>
+        <p class="price">$60.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Zara+Man&amount=60.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+    </div>
+
+    <div class="product-card">
+        <h3>Sudadera H&M</h3>
+        <div class="gallery">
+            <img src="image1.jpeg" alt="Sudadera 1">
+            <img src="image2.jpeg" alt="Sudadera 2">
+            <img src="image3.jpeg" alt="Sudadera 3">
+        </div>
+        <p class="price">$30.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sudadera+HM&amount=30.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+    </div>
+
+    <div class="product-card">
+        <h3>Nutribullet</h3>
+        <div class="gallery">
+            <img src="image12.jpeg" alt="Nutri 1">
+            <img src="image14.jpeg" alt="Nutri 2">
+        </div>
         <p class="price">$80.00 USD</p>
         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Nutribullet&amount=80.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
     </div>
 
     <div class="product-card">
-        <img src="IMG_2443.jpeg" alt="Producto 2">
-        <h3>Jeans H&M Straight Fit</h3>
+        <h3>Pantalón Straight Fit (36/34)</h3>
+        <div class="gallery">
+            <img src="image18.jpeg" alt="Pant 1">
+            <img src="image20.jpeg" alt="Pant 2">
+        </div>
         <p class="price">$25.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Jeans+HM&amount=25.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
-    </div>
-
-    <div class="product-card">
-        <img src="IMG_2444.jpeg" alt="Producto 3">
-        <h3>Chamarra Zara Man</h3>
-        <p class="price">$80.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Zara+Man&amount=80.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
-    </div>
-
-    <div class="product-card">
-        <img src="IMG_2445.jpeg" alt="Producto 4">
-        <h3>Chamarra Guess Classic</h3>
-        <p class="price">$45.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Guess+Classic&amount=45.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
-    </div>
-
-    <div class="product-card">
-        <img src="IMG_2446.jpeg" alt="Producto 5">
-        <h3>Sudadera H&M (Size M)</h3>
-        <p class="price">$40.00 USD</p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sudadera+HM&amount=40.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Pantalon+Straight&amount=25.00&currency_code=USD" class="pay-btn">Pay with PayPal</a>
     </div>
 
 </body>
