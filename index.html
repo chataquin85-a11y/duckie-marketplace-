@@ -4,55 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckie Marketplace</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: url('IMG_0483.png') no-repeat center center fixed; 
+            background-size: cover; 
+            margin: 0; padding: 20px; text-align: center; color: #333;
+        }
+        h1 { color: #fff; text-shadow: 2px 2px 8px #000; font-size: 2.5em; margin-bottom: 30px; }
+        .product-card { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 20px; padding: 25px; margin: 20px auto; 
+            max-width: 450px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .gallery { display: flex; gap: 10px; justify-content: center; margin: 15px 0; overflow-x: auto; }
+        .gallery img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; border: 2px solid #ddd; }
+        .price { font-size: 1.6em; color: #27ae60; font-weight: bold; margin: 10px 0; }
+        .description { font-size: 0.95em; color: #555; margin-bottom: 10px; line-height: 1.4; text-align: left; }
+        .pay-btn { display: block; background: #ffc439; padding: 12px; border-radius: 50px; font-weight: bold; text-decoration: none; color: black; transition: 0.3s; }
+        .pay-btn:hover { background: #e0ac2d; }
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>Duckie Marketplace</h1>
-        <p>Explore our items / Explora nuestros artículos</p>
-    </header>
+    <h1>Duckie Marketplace</h1>
 
-    <main>
-        <section class="product">
-            <h2>Guess Sweater / Suéter Guess</h2>
-            <p class="description">Soft gray knit jacket, size L, with the iconic embossed Guess logo. Excellent condition.<br>
-            <em>Chamarra de punto gris suave, talla L, con el icónico logotipo de Guess en relieve. Perfecto estado.</em></p>
-            <p class="price">$45.00 USD</p>
-            
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="YOUR_EMAIL@example.com">
-                <input type="hidden" name="item_name" value="Guess Sweater">
-                <input type="hidden" name="amount" value="45.00">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Buy Now">
-            </form>
-        </section>
+    <div class="product-card">
+        <h3>Guess Sweater / Suéter Guess</h3>
+        <div class="gallery">
+            <img src="IMG_2441.jpeg" alt="Guess 1">
+            <img src="IMG_2443.jpeg" alt="Guess 2">
+        </div>
+        <p class="description">Soft gray knit jacket, size L, with the iconic embossed Guess logo. Excellent condition.<br>
+        <em>Chamarra de punto gris suave, talla L, con el icónico logotipo de Guess en relieve. Perfecto estado.</em></p>
+        <p class="price">$45.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sueter+Guess&amount=45.00&currency_code=USD" class="pay-btn">Buy Now / Comprar</a>
+    </div>
 
-        <section class="product">
-            <h2>Zara Man</h2>
-            <p class="description">Quilted Zara Man jacket. Modern and elegant style, perfect for any occasion. Impeccable.<br>
-            <em>Chamarra Zara Man acolchada. Estilo moderno y elegante, ideal para cualquier ocasión. Impecable.</em></p>
-            <p class="price">$60.00 USD</p>
-            
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="YOUR_EMAIL@example.com">
-                <input type="hidden" name="item_name" value="Zara Man Jacket">
-                <input type="hidden" name="amount" value="60.00">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Buy Now">
-            </form>
-        </section>
-    </main>
+    <div class="product-card">
+        <h3>Zara Man</h3>
+        <div class="gallery">
+            <img src="IMG_2444.jpeg" alt="Zara 1">
+            <img src="IMG_2445.jpeg" alt="Zara 2">
+            <img src="IMG_2446.jpeg" alt="Zara 3">
+        </div>
+        <p class="description">Quilted Zara Man jacket. Modern and elegant style, perfect for any occasion. Impeccable.<br>
+        <em>Chamarra Zara Man acolchada. Estilo moderno y elegante, ideal para cualquier ocasión. Impecable.</em></p>
+        <p class="price">$60.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Zara+Man&amount=60.00&currency_code=USD" class="pay-btn">Buy Now / Comprar</a>
+    </div>
 
-    <footer>
-        <a href="https://wa.me/16198918186?text=Hi! I am interested in one of your products from Duckie Marketplace. / Hola, vi tu Duckie Marketplace y me interesa un producto." 
-           class="whatsapp-button" target="_blank">
-           💬 Chat with me / Chatea conmigo
-        </a>
-    </footer>
+    <div class="product-card">
+        <h3>H&M Sweatshirt / Sudadera H&M</h3>
+        <div class="gallery">
+            <img src="image1.jpeg" alt="HM 1">
+            <img src="image2.jpeg" alt="HM 2">
+            <img src="image3.jpeg" alt="HM 3">
+        </div>
+        <p class="description">H&M sweatshirt, size M. Comfortable and durable material, perfect for daily use.<br>
+        <em>Sudadera H&M en talla M. Material cómodo y duradero, perfecta para el uso diario.</em></p>
+        <p class="price">$30.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Sudadera+HM&amount=30.00&currency_code=USD" class="pay-btn">Buy Now / Comprar</a>
+    </div>
+
+    <div class="product-card">
+        <h3>Nutribullet</h3>
+        <div class="gallery">
+            <img src="image12.jpeg" alt="Nutri 1">
+            <img src="image14.jpeg" alt="Nutri 2">
+        </div>
+        <p class="description">Powerful Nutribullet extractor for your smoothies and healthy juices. Compact and easy to clean.<br>
+        <em>Extractor Nutribullet potente para tus batidos y jugos saludables. Compacto y fácil de limpiar.</em></p>
+        <p class="price">$80.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Nutribullet&amount=80.00&currency_code=USD" class="pay-btn">Buy Now / Comprar</a>
+    </div>
+
+    <div class="product-card">
+        <h3>Straight Fit Pants / Pantalón Straight Fit</h3>
+        <div class="gallery">
+            <img src="image18.jpeg" alt="Pants 1">
+            <img src="image20.jpeg" alt="Pants 2">
+        </div>
+        <p class="description">Straight Fit pants, size 36/34. Classic and comfortable cut, ideal for a casual look.<br>
+        <em>Pantalón Straight Fit, talla 36/34. Corte clásico y cómodo, ideal para un look casual.</em></p>
+        <p class="price">$25.00 USD</p>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=o.apolonio@yahoo.com&item_name=Pantalon+Straight&amount=25.00&currency_code=USD" class="pay-btn">Buy Now / Comprar</a>
+    </div>
+
+    <a href="https://wa.me/16198918186?text=Hi,%20I%20saw%20your%20Duckie%20Marketplace%20and%20am%20interested%20in%20a%20product.%20/%20Hola,%20vi%20tu%20Duckie%20Marketplace%20y%20me%20interesa%20un%20producto." 
+       style="position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; font-family: sans-serif; font-size: 16px;" 
+       target="_blank">
+       💬 Chat with me / Chatea conmigo
+    </a>
 
 </body>
 </html>
